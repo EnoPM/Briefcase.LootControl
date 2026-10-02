@@ -67,7 +67,7 @@ jobs:
       - name: Build and test Windows mod
         shell: pwsh
         run: |
-          ./framework/scripts/ue4ss/Build-ServerMods.ps1 -BuildDirectory ./framework/build-ue4ss-ninja -ModTargets 'Briefcase.LootControl.UE4SS'
+          ./framework/scripts/ue4ss/Build-ServerMods.ps1 -BuildDirectory ./framework/build-ue4ss-ninja -ModTargets 'Briefcase.LootControl.UE4SS','Briefcase.LootControl.Config'
           if ($LASTEXITCODE) { throw 'UE4SS mod build failed.' }
           ctest --test-dir ./framework/build-ue4ss-ninja -R 'Briefcase.DeceiveInc.Contracts|Briefcase.LootControl.Config' --output-on-failure
           if ($LASTEXITCODE) { throw 'Mod tests failed.' }
