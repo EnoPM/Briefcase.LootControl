@@ -1,0 +1,2 @@
+#pragma once
+inline constexpr auto briefcase_mod_version = L"@MOD_VERSION@";

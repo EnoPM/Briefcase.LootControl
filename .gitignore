@@ -1,0 +1,7 @@
+/build/
+/dist/
+/.sdk/
+*.pdb
+*.obj
+*.user
+/.idea/
