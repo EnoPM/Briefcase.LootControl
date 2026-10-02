@@ -60,3 +60,7 @@ Save the file and restart the server. Invalid object names or malformed JSON are
 ## Remove
 
 Stop the server, remove `ue4ss/Mods/BriefcaseLootControl`, delete its line from `ue4ss/Mods/mods.txt`, and restart.
+
+## License
+
+This mod is licensed under the [MIT License](LICENSE). Third-party components retain their own licenses.

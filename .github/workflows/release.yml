@@ -78,5 +78,13 @@ jobs:
           RELEASE_DRAFT: ${{ inputs.draft }}
         run: |
           $archive = ./framework/scripts/ue4ss/Package-ServerMod.ps1 -RepositoryName Briefcase.LootControl -InstallName BriefcaseLootControl -BuildDirectory ./framework/build-ue4ss-ninja
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $license = 'framework/repositories/Briefcase.LootControl/LICENSE'
+          $zip = [IO.Compression.ZipFile]::Open($archive, [IO.Compression.ZipArchiveMode]::Update)
+          try {
+            if (-not $zip.GetEntry('ue4ss/Mods/BriefcaseLootControl/LICENSE')) {
+              [IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $license, 'ue4ss/Mods/BriefcaseLootControl/LICENSE') | Out-Null
+            }
+          } finally { $zip.Dispose() }
           $draft = $env:RELEASE_DRAFT -eq 'true'
           ./framework/scripts/ue4ss/Publish-ServerMod.ps1 -RepositoryName Briefcase.LootControl -Repository $env:GITHUB_REPOSITORY -Commit $env:GITHUB_SHA -Archive $archive -Draft:$draft
